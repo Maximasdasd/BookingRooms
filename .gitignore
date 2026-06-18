@@ -1,0 +1,25 @@
+# Виртуальное окружение Poetry
+.venv/
+
+# Секреты и переменные окружения
+.env
+.env.local
+*.env
+
+# Кэш и скомпилированные файлы Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Кэши инструментов
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# ОС
+.DS_Store
+Thumbs.db
