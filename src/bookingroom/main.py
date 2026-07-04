@@ -1,7 +1,4 @@
-from fastapi import FastAPI, APIRouter, Request
-
-
-
+from fastapi import FastAPI
 
 
 
@@ -21,7 +18,7 @@ def root():
     }
         
 
-
 if __name__ == "__main__":
     import uvicorn
+    
     uvicorn.run("bookingroom.main:app", host="0.0.0.0", port=8000, reload=True)
