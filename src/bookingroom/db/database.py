@@ -13,5 +13,6 @@ async_session_maker = async_sessionmaker(
 
 
 async def get_async_session():
+    """генератор сессий для ендпоинтов"""
     async with async_session_maker() as async_session:
         yield async_session
