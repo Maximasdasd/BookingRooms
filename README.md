@@ -13,10 +13,10 @@ FastAPI, PostgreSQL, SQLAlchemy, Alembic, Poetry
    poetry install
 
 3. Создать .env по образцу .env.example и заполнить
-   BD_HOST=localhost
-   BD_USER=postgres
-   BD_PASSWORD=...
-   BD_NAME=...
+   DB_HOST=localhost
+   DB_USER=postgres
+   DB_PASSWORD=...
+   DB_NAME=...
 
 4. Применить миграции
    poetry run alembic upgrade head
