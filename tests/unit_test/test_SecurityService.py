@@ -1,5 +1,7 @@
+from datetime import datetime, timedelta, timezone
+
+import jwt
 import pytest
-from datetime import datetime, timezone
 
 class TestSecurityService:
     def test_verify_password(self, password, security_service):
@@ -31,3 +33,31 @@ class TestSecurityService:
         assert result['sub'] == str(staff_id)
         assert isinstance(result['exp'], int)
         assert result['exp'] - now > 0
+
+
+    def test_decode_expired_token(self, security_service):
+        expired_token = jwt.encode(
+            {
+                "sub": "1",
+                "exp": datetime.now(timezone.utc) - timedelta(minutes=1),
+            },
+            security_service.secret_key,
+            algorithm=security_service.algorithm,
+        )
+
+        with pytest.raises(jwt.ExpiredSignatureError):
+            security_service.decode_access_token(expired_token)
+
+
+    def test_decode_token_with_invalid_signature(self, security_service):
+        token_with_invalid_signature = jwt.encode(
+            {
+                "sub": "1",
+                "exp": datetime.now(timezone.utc) + timedelta(minutes=30),
+            },
+            "Another_test_secret_key_QWERTYQWERTY",
+            algorithm=security_service.algorithm,
+        )
+
+        with pytest.raises(jwt.InvalidSignatureError):
+            security_service.decode_access_token(token_with_invalid_signature)
