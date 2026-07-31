@@ -3,9 +3,6 @@ from datetime import datetime, timedelta, timezone
 from pwdlib import PasswordHash
 import jwt
 
-from bookingroom.core.config import settings
-
-
 
 class SecurityService:
     def __init__(self, 
@@ -50,11 +47,3 @@ class SecurityService:
             options={"require": ["sub", "exp"]}
         )
         return payload
-
-
-security_service = SecurityService(
-    secret_key=settings.SECRET_KEY,
-    algorithm=settings.ALGORITHM,
-    access_token_expire_minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES,
-    password_hasher=PasswordHash.recommended()
-)
