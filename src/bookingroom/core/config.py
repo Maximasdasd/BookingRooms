@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     ALGORITHM: str = Field(default="HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=30)
     REFRESH_TOKEN_EXPIRE_DAYS: int = Field(default=30)
+
+
+    TEST_DATABASE_URL: str
+
     
     model_config = SettingsConfigDict(
         env_file=".env", # ../.env # .env (для миграций для докера а также для вставки фейк данных)

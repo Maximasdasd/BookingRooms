@@ -14,11 +14,20 @@ from alembic import context
 # access to the values within the .ini file in use.
 config = context.config
 
-config.set_main_option(
-    "sqlalchemy.url",
-    settings.database_url,
-)
+target_database = context.get_x_argument(
+    as_dictionary=True,
+).get("database", "main")
 
+if target_database == "main":
+    database_url = settings.database_url
+elif target_database == "test":
+    database_url = settings.TEST_DATABASE_URL
+else:
+    raise ValueError(
+        "Параметр database должен быть main или test",
+    )
+
+config.set_main_option("sqlalchemy.url", database_url)
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:

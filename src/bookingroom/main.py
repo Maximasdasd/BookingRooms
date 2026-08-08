@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from bookingroom.routers.staff_routers import staffrouter
 
 
 app = FastAPI(
@@ -8,6 +8,7 @@ app = FastAPI(
     description="API для бронирования переговорных",
 )
 
+app.include_router(staffrouter)
 
 @app.get("/")
 def root():

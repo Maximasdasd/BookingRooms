@@ -18,8 +18,10 @@ FastAPI, PostgreSQL, SQLAlchemy, Alembic, Poetry
    DB_PASSWORD=...
    DB_NAME=...
 
-4. Применить миграции
+4. Применить миграции для основной бд
    poetry run alembic upgrade head
+   Применить миграции для тестов 
+   poetry run alembic -x database=test upgrade head
 
 5. Запустить
    poetry run uvicorn bookingroom.main:app --reload
